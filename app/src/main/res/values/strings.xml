@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="start">Start</string>
+    <string name="stop">Stop</string>
+    <string name="click_volume">Click volume: %1$d%%</string>
+</resources>
