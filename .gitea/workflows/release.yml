@@ -1,0 +1,41 @@
+name: Build debug release
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Build and lint debug APK
+        run: ./gradlew --no-daemon lintDebug assembleDebug
+
+      - name: Name APK
+        env:
+          RELEASE_TAG: ${{ gitea.ref_name }}
+        run: cp app/build/outputs/apk/debug/app-debug.apk "40Hz-Gamma-Clicks-${RELEASE_TAG}-debug.apk"
+
+      - name: Create Gitea release
+        uses: akkuman/gitea-release-action@v1
+        env:
+          NODE_OPTIONS: --experimental-fetch
+        with:
+          name: 40 Hz Gamma Clicks ${{ gitea.ref_name }}
+          body: Debug-signed Android APK. Install manually; Android may warn because this is not Play Store signed.
+          prerelease: true
+          files: 40Hz-Gamma-Clicks-${{ gitea.ref_name }}-debug.apk
