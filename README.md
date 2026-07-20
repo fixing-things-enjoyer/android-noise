@@ -2,6 +2,8 @@
 
 Android app that generates a 1 ms rectangular click every 25 ms (40 Hz), matching the auditory timing described by Chan et al. It uses a foreground media-playback service and deliberately never requests audio focus, allowing Android to mix it with music, podcasts, and other media.
 
+Playback can run indefinitely or stop automatically after a duration set in hours, minutes, and seconds. Playback can always be stopped immediately from the app or notification.
+
 ## Build
 
 ```sh

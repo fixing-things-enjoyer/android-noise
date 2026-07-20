@@ -28,7 +28,7 @@ jobs:
       - name: Name APK
         env:
           RELEASE_TAG: ${{ gitea.ref_name }}
-        run: cp app/build/outputs/apk/debug/app-debug.apk "40Hz-Gamma-Clicks-${RELEASE_TAG}-debug.apk"
+        run: cp app/build/outputs/apk/debug/app-debug.apk "40Hz-Gamma-Clicks-${RELEASE_TAG}.apk"
 
       - name: Create Gitea release
         uses: akkuman/gitea-release-action@v1
@@ -38,4 +38,4 @@ jobs:
           name: 40 Hz Gamma Clicks ${{ gitea.ref_name }}
           body: Debug-signed Android APK. Install manually; Android may warn because this is not Play Store signed.
           prerelease: true
-          files: 40Hz-Gamma-Clicks-${{ gitea.ref_name }}-debug.apk
+          files: 40Hz-Gamma-Clicks-${{ gitea.ref_name }}.apk

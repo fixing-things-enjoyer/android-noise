@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="start">Start</string>
+    <string name="app_title">40 Hz Gamma Clicks</string>
+    <string name="subtitle">1 ms click every 25 ms\nPlays alongside music and podcasts</string>
+    <string name="indefinite">Indefinite</string>
+    <string name="timer">Timer</string>
+    <string name="duration">Duration</string>
+    <string name="hours">HOURS</string>
+    <string name="minutes">MINUTES</string>
+    <string name="seconds">SECONDS</string>
     <string name="stop">Stop</string>
+    <string name="start_playback">Start playback</string>
+    <string name="stop_playback">Stop playback</string>
     <string name="click_volume">Click volume: %1$d%%</string>
+    <string name="remaining">Remaining  %1$s</string>
+    <string name="playing_indefinitely">Playing indefinitely</string>
+    <string name="notification_title">40 Hz clicks playing</string>
+    <string name="notification_remaining">%1$s remaining · mixed with other audio</string>
+    <string name="notification_indefinite">Indefinite · mixed with other audio</string>
+    <string name="warning">Start low. Phone volume does not correspond to the study’s measured dB level. Not a medical treatment.</string>
 </resources>
