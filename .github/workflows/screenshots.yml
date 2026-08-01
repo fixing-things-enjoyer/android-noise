@@ -47,7 +47,18 @@ jobs:
             mkdir -p screenshot-output
             adb exec-out screencap -p > screenshot-output/idle.png
             adb shell uiautomator dump /sdcard/window.xml
-            adb pull /sdcard/window.xml screenshot-output/window.xml
+            adb pull /sdcard/window.xml screenshot-output/idle.xml
+            adb shell input tap 778 419
+            sleep 2
+            adb exec-out screencap -p > screenshot-output/timer.png
+            adb shell uiautomator dump /sdcard/window.xml
+            adb pull /sdcard/window.xml screenshot-output/timer.xml
+            adb shell input tap 540 1266
+            sleep 3
+            adb exec-out screencap -p > screenshot-output/playing.png
+            adb shell cmd statusbar expand-notifications
+            sleep 2
+            adb exec-out screencap -p > screenshot-output/notification.png
 
       - name: Upload screenshots
         uses: actions/upload-artifact@v7
