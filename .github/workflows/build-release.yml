@@ -1,0 +1,57 @@
+name: Build and release
+
+on:
+  push:
+    branches:
+      - master
+    tags:
+      - "v*"
+  pull_request:
+    branches:
+      - master
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Build and lint debug APK
+        run: ./gradlew --no-daemon lintDebug assembleDebug
+
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: 40Hz-Gamma-Clicks-${{ github.ref_name }}
+          path: app/build/outputs/apk/debug/app-debug.apk
+
+      - name: Name release APK
+        if: startsWith(github.ref, 'refs/tags/v')
+        env:
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: cp app/build/outputs/apk/debug/app-debug.apk "40Hz-Gamma-Clicks-${RELEASE_TAG}.apk"
+
+      - name: Create GitHub release
+        if: startsWith(github.ref, 'refs/tags/v')
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: >-
+          gh release create "$RELEASE_TAG"
+          "40Hz-Gamma-Clicks-${RELEASE_TAG}.apk"
+          --title "40 Hz Gamma Clicks $RELEASE_TAG"
+          --notes "Debug-signed Android APK. Install manually; Android may warn because this is not Play Store signed."
+          --prerelease
