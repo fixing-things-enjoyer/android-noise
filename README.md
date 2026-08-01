@@ -4,6 +4,13 @@ Android app that generates a 1 ms rectangular click every 25 ms (40 Hz), matchin
 
 Playback can run indefinitely or stop automatically after a duration set in hours, minutes, and seconds. Playback can always be stopped immediately from the app or notification.
 
+## Screenshots
+
+<p align="center">
+  <img src="docs/screenshots/idle.png" alt="Indefinite playback screen" width="320">
+  <img src="docs/screenshots/playing.png" alt="Timed playback in progress" width="320">
+</p>
+
 ## Build
 
 ```sh
